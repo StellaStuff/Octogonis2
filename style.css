@@ -1,0 +1,43 @@
+@font-face {
+  src: url(propaganda.ttf);
+  font-family: blah;
+}
+
+
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+canvas {
+  display: block;
+}
+
+button {
+  color: #ffffff;
+  font-family: blah;
+  background-color: #000000;
+  border-color: #ffffff;
+  height:25px;
+  font-size: 20px;
+}
+
+
+.slider {
+
+  -webkit-appearance: none;
+  width:129px;
+  
+  background-color: #000000;
+  border-style: solid;
+  border-color: #ffffff;
+
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 15px;
+  height: 15px;
+  background: #ffffff;
+  cursor: pointer;
+}
