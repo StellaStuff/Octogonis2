@@ -4,7 +4,7 @@ var halfnotes = [0,1,1,0,1,1,1,0];
 var fullnotes = [1,0,1,0,1,1,0,1,0,1,0,1];
 var noteangle = [1,2,3,4,5,7,8,9,10,11,12,13];
 var speed = 30; //ticks per second
-var difficulty = 10 //how hard the game is, higher number harder the game, the ammount of pixels the lazers move per tick
+var difficulty = 0 //how hard the game is, higher number harder the game, the ammount of pixels the lazers move per tick (gets set on song load)
 
 let midiPlayer, audio, playField, amplitude, midiFile, songs;
 
@@ -13,7 +13,7 @@ function preload() {
 }
 
 function setup() {
-    load();
+    load("tutorial");
     playField = new PlayField();
     base = new Base();
     player = new Player();
@@ -24,10 +24,13 @@ function setup() {
     frameRate(120); //sets the max framerate
 }
 
-function load() { //loads the files into memory
+function load(songName) { //loads the files into memory
+    gameState = "loading";
     console.log("loading!");
-    audio = loadSound("music/tutorial.mp3");
-    midiFile = loadBytes("music/tutorial.mid",function() {midiFile.isLoaded = true});
+    print(songs);
+    difficulty = songs["songs"][songName]["difficulty"];
+    audio = loadSound("music/" + songName + ".mp3");
+    midiFile = loadBytes("music/" + songName + ".mid",function() {midiFile.isLoaded = true});
 }
 
 function loading() { //checks if stuff is loaded in before finishing the loading process and moving on
@@ -46,7 +49,6 @@ function loading() { //checks if stuff is loaded in before finishing the loading
         
         midiPlayer.loadArrayBuffer(midiFile.bytes);
         
-
         gameState = "titleScreen";
     }
 }
