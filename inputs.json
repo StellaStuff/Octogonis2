@@ -1,0 +1,44 @@
+{
+    "inputs": {
+        "leftUP": {
+            "key": "w",
+            "code": 87
+        },
+        "leftDOWN": {
+            "key": "s",
+            "code": 83
+        },
+        "leftLEFT": {
+            "key": "a",
+            "code": 65
+        },
+        "leftRIGHT": {
+            "key": "d",
+            "code": 68
+        },
+        "rightUP": {
+            "key": "i",
+            "code": 73
+        },
+        "rightDOWN": {
+            "key": "k",
+            "code": 75
+        },
+        "rightLEFT": {
+            "key": "j",
+            "code": 74
+        },
+        "rightRIGHT": {
+            "key": "l",
+            "code": 76
+        },
+        "DRUM": {
+            "key": "space",
+            "code": 32
+        },
+        "PAUSE": {
+            "key": "escape",
+            "code": 27
+        }
+    }
+}

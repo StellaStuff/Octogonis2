@@ -10,35 +10,33 @@ let midiPlayer, audio, playField, amplitude, midiFile, songs;
 
 function preload() {
     songs = loadJSON("music.json");
+    keyboardHandler = loadJSON("inputs.json");
 }
 
 function setup() {
     load("tutorial");
     playField = new PlayField();
     base = new Base();
-    player = new Player();
     amplitude = new p5.Amplitude();
+    keyboardHandler = Object.assign(keyboardHandler,new KeyboardHandler());
+    
     createCanvas(1280,820);
     size = sqrt((width * width) + (height * height)) / 2; //sets the size variable that dictates the size of objects that have to go off screen, it is the distance from one corner of the screen to the other in pixels
     setInterval(tick, 1000/speed); //sets up the tick function where all of the game logic resides, it is seperate from the draw loop so that the framerate doesnt effect game speed or audio sync
-    frameRate(120); //sets the max framerate
+    frameRate(60); //sets the max framerate
 }
 
 function load(songName) { //loads the files into memory
     gameState = "loading";
     console.log("loading!");
-    print(songs);
     difficulty = songs["songs"][songName]["difficulty"];
     audio = loadSound("music/" + songName + ".mp3");
     midiFile = loadBytes("music/" + songName + ".mid",function() {midiFile.isLoaded = true});
 }
 
 function loading() { //checks if stuff is loaded in before finishing the loading process and moving on
-    //console.log(midiFile);
     if(audio.isLoaded && midiFile.isLoaded) {
         console.log("done loading!");
-        console.log(midiFile);
-        
         midiPlayer = new MidiPlayer.Player(function(event) {
             playField.add(event);
         });
@@ -50,6 +48,7 @@ function loading() { //checks if stuff is loaded in before finishing the loading
         midiPlayer.loadArrayBuffer(midiFile.bytes);
         
         gameState = "titleScreen";
+        print(keyboardHandler);
     }
 }
 
@@ -73,7 +72,6 @@ function draw() { ///main p5js draw loop. ONLY use for graphics related function
 }
 
 function tick() { //the loop where all of the game logic resides
-    //console.log("test");
     switch (gameState) {
         case "titleScreen":
         titleScreen();
@@ -120,7 +118,7 @@ function drawTitleScreen() {
     fill(0);
     stroke(255);
     base.show();
-    player.show();
+    //player.show();
 }
 
 function titleScreen() {

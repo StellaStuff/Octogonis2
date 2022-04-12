@@ -40,6 +40,8 @@ class Base {
         this.deadzone = 2;
         this.distance;
         this.health = 25;
+        //this.player1 = new player();
+        //this.player2 = new player();
     }
     show () {
         nGon(this.x,this.y,100,100,8,TWO_PI/16);

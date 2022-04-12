@@ -1,16 +1,71 @@
+
+let keyboardHandler;
+
+class KeyboardHandler {
+    constructor() {
+        let temp = Object.entries(keyboardHandler.inputs);
+        print(temp);
+        for( var i = 0; i += 1; i < temp.length) {
+            print( Object.fromEntries(temp[i][1]));
+        }
+        
+    }
+}
+
+
 function keyPressed() {
-  if (keyCode === LEFT_ARROW || key == 'a') {
-    left = true;
+  if (keyCode === LEFT_ARROW) {
+    Rleft = true;
   }
-  if (keyCode === RIGHT_ARROW || key == 'd') {
-    right = true;
+  if (keyCode === RIGHT_ARROW) {
+    Rright = true;
   }
-  if (keyCode === UP_ARROW || key == 'w') {
-    up = true;
+  if (keyCode === UP_ARROW) {
+    Rup = true;
   }
-  if (keyCode === DOWN_ARROW || key == 's') {
-    down = true;
+  if (keyCode === DOWN_ARROW) {
+    Rdown = true;
   }
+  if (key == 'a') {
+    Lleft = true;
+  }
+  if (key == 'd') {
+    Lright = true;
+  }
+  if (key == 'w') {
+    Lup = true;
+  }
+  if (key == 's') {
+    Ldown = true;
+  }
+}
+    
+function keyReleased() {
+  if (keyCode === LEFT_ARROW) {
+    Rleft = false;
+  }
+  if (keyCode === RIGHT_ARROW) {
+    Rright = false;
+  }
+  if (keyCode === UP_ARROW) {
+    Rup = false;
+  }
+  if (keyCode === DOWN_ARROW) {
+    Rdown = false;
+  }
+  if (key == 'a') {
+    Lleft = false;
+  }
+  if (key == 'd') {
+    Lright = false;
+  }
+  if (key == 'w') {
+    Lup = false;
+  }
+  if (key == 's') {
+    Ldown = false;
+  }
+}
  
     /*
   if (keyCode === ENTER && debug) {
@@ -72,22 +127,9 @@ function keyPressed() {
   }
   */
 
-}
 
-function keyReleased() {
-  if (keyCode === LEFT_ARROW || key == 'a') {
-    left = false;
-  }
-  if (keyCode === RIGHT_ARROW || key == 'd') {
-    right = false;
-  }
-  if (keyCode === UP_ARROW || key == 'w') {
-    up = false;
-  }
-  if (keyCode === DOWN_ARROW || key == 's') {
-    down = false;
-  }
-}
+
+
 
 /*document.addEventListener("visibilitychange", function() {
   if (gameState == "game") {
