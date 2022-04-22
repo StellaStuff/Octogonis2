@@ -1,8 +1,12 @@
 {
     "songs": {
         "tutorial": {
-            "difficulty": "10",
+            "difficulty": 10,
             "skill level": "easy"
+        },
+        "testtwo": {
+            "difficulty": 10,
+            "skill level": "debug"
         }
     }
 }

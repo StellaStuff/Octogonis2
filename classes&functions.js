@@ -97,8 +97,8 @@ class Player {
     }
     show() {
         colorMode(RGB);
-        if (this.id == 0) stroke(255,128,0);
-        if (this.id == 1) stroke(100,128,255);
+        stroke(colors[this.id]);
+        fill(0,0,0,0);
         raycle(20,60,(this.direction * 2) + 4,1/10,16);
     }
     move() {
@@ -147,16 +147,14 @@ class PlayField {
             if (this.lazers[i].end <= 0) {
                 this.lazers.splice(i,1);
                 i -= 1;
-                //print("fuck");
             }
         }
     }
     add(event) {
-        //print(event);
         //print(event.noteNumber % 12);
         if (event.name == "Note on") {
             this.notes[event.noteNumber] = true;
-            this.lazers.push(new lazer(event.noteNumber % 12,abs(event.noteNumber/12),event.noteNumber));
+            this.lazers.push(new lazer(event.noteNumber % 12,abs(event.noteNumber/12),event.noteNumber,event.track - 2));
         }
         if (event.name == "Note off") this.notes[event.noteNumber] = false;
     }
@@ -169,18 +167,25 @@ class PlayField {
 }
 
 class lazer {
-    constructor(dir,oct,note) {
+    constructor(dir,oct,note,id) {
         this.direction = dir;
+        if (id < 0) this.direction = 12;
         this.octave = oct;
         this.growing = true; 
         this.start = size;
         this.end = size;
         this.note = note;
         this.playing = false;
+        this.id = id;
     }
     show() {
-        colorMode(HSB);
-        stroke((this.octave/9)*255,255,100);
+        //colorMode(RGB);
+        if (this.id < 0) {
+            stroke(colors[2]);   
+        } else {
+            stroke(colors[this.id]);
+        }
+        //stroke((this.octave/9)*255,255,100);
         fill(0,0,0,0);
         if (this.playing) {
             raycle(this.start,this.end,noteangle[this.direction] + 5,0.031 + random(0.01),16);
