@@ -3,14 +3,15 @@ var size;
 var halfnotes = [0,1,1,0,1,1,1,0];
 var fullnotes = [1,0,1,0,1,1,0,1,0,1,0,1];
 var noteangle = [1,2,3,4,5,7,8,9,10,11,12,13];
+var keyangles = [[0,1,0,0],[0,1,1,0],[0,0,1,0],[1,0,1,0],[1,0,0,0],[1,0,0,1],[0,0,0,1],[0,1,0,1]];
 var speed = 30; //ticks per second
 var difficulty = 0 //how hard the game is, higher number harder the game, the ammount of pixels the lazers move per tick (gets set on song load)
 
-let midiPlayer, audio, playField, amplitude, midiFile, songs;
+let midiPlayer, audio, playField, amplitude, midiFile, songs, inputs;
 
 function preload() {
     songs = loadJSON("music.json");
-    keyboardHandler = loadJSON("inputs.json");
+    inputs = loadJSON("inputs.json");
 }
 
 function setup() {
@@ -18,7 +19,6 @@ function setup() {
     playField = new PlayField();
     base = new Base();
     amplitude = new p5.Amplitude();
-    keyboardHandler = Object.assign(keyboardHandler,new KeyboardHandler());
     
     createCanvas(1280,820);
     size = sqrt((width * width) + (height * height)) / 2; //sets the size variable that dictates the size of objects that have to go off screen, it is the distance from one corner of the screen to the other in pixels
@@ -48,7 +48,7 @@ function loading() { //checks if stuff is loaded in before finishing the loading
         midiPlayer.loadArrayBuffer(midiFile.bytes);
         
         gameState = "titleScreen";
-        print(keyboardHandler);
+        //print(keyboardHandler);
     }
 }
 

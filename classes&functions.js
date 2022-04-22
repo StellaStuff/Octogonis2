@@ -1,5 +1,3 @@
-
-
 function raycle(id, od, seg, segw, segs) { //draws a slice of an ngon, diameters are in pixels, width is in ratio
     if (typeof segs != "number") segs = 8;
     i = seg/segs
@@ -40,13 +38,19 @@ class Base {
         this.deadzone = 2;
         this.distance;
         this.health = 25;
-        //this.player1 = new player();
-        //this.player2 = new player();
+        this.player1 = new Player(0);
+        this.player2 = new Player(1);
     }
     show () {
         nGon(this.x,this.y,100,100,8,TWO_PI/16);
+        this.player1.show();
+        this.player2.show();
     }
     move () {
+        
+        this.player1.move();
+        this.player2.move();
+        
         this.x += this.xv;
         this.y += this.yv;
         
@@ -87,16 +91,43 @@ class Base {
 }
 
 class Player {
-    constructor() {
-        this.direction = 0;
+    constructor(ID) {
+        this.direction = ID;
+        this.id = ID;
     }
     show() {
+        colorMode(RGB);
+        if (this.id == 0) stroke(255,128,0);
+        if (this.id == 1) stroke(100,128,255);
         raycle(20,60,(this.direction * 2) + 4,1/10,16);
     }
     move() {
+        if (this.id == 0) {
+            var u = inputs.leftUP.active;
+            var d = inputs.leftDOWN.active;
+            var l = inputs.leftLEFT.active;
+            var r = inputs.leftRIGHT.active;
+        }
         
+        if (this.id == 1) {
+            var u = inputs.rightUP.active;
+            var d = inputs.rightDOWN.active;
+            var l = inputs.rightLEFT.active;
+            var r = inputs.rightRIGHT.active;
+        }
+        
+        for(let i = 0; i < keyangles.length; i ++) {
+            if(keyangles[i][0] == u && 
+               keyangles[i][1] == d && 
+               keyangles[i][2] == l && 
+               keyangles[i][3] == r) {
+                this.direction = i;
+                return;
+            }
+        }
     }
 }
+
 
 class PlayField {
     constructor() {

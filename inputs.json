@@ -1,44 +1,52 @@
 {
-    "inputs": {
-        "leftUP": {
-            "key": "w",
-            "code": 87
-        },
-        "leftDOWN": {
-            "key": "s",
-            "code": 83
-        },
-        "leftLEFT": {
-            "key": "a",
-            "code": 65
-        },
-        "leftRIGHT": {
-            "key": "d",
-            "code": 68
-        },
-        "rightUP": {
-            "key": "i",
-            "code": 73
-        },
-        "rightDOWN": {
-            "key": "k",
-            "code": 75
-        },
-        "rightLEFT": {
-            "key": "j",
-            "code": 74
-        },
-        "rightRIGHT": {
-            "key": "l",
-            "code": 76
-        },
-        "DRUM": {
-            "key": "space",
-            "code": 32
-        },
-        "PAUSE": {
-            "key": "escape",
-            "code": 27
-        }
+    "leftUP": {
+        "key": "w",
+        "code": 87,
+        "active": 0
+    },
+    "leftDOWN": {
+        "key": "s",
+        "code": 83,
+        "active": 0
+    },
+    "leftLEFT": {
+        "key": "a",
+        "code": 65,
+        "active": 0
+    },
+    "leftRIGHT": {
+        "key": "d",
+        "code": 68,
+        "active": 0
+    },
+    "rightUP": {
+        "key": "i",
+        "code": 73,
+        "active": 0
+    },
+    "rightDOWN": {
+        "key": "k",
+        "code": 75,
+        "active": 0
+    },
+    "rightLEFT": {
+        "key": "j",
+        "code": 74,
+        "active": 0
+    },
+    "rightRIGHT": {
+        "key": "l",
+        "code": 76,
+        "active": 0
+    },
+    "DRUM": {
+        "key": "space",
+        "code": 32,
+        "active": 0
+    },
+    "PAUSE": {
+        "key": "escape",
+        "code": 27,
+        "active": 0
     }
 }
