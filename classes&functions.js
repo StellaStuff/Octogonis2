@@ -77,16 +77,27 @@ class Base {
             }
        // }
     } 
-    hit (dir) {
+    hit (dir,id) {
         var i = (noteangle[dir] + 5)/16; // gets a ratio from the given note angle and the max number of angles using the "noteangle" lookup table
+        var rna = (noteangle[dir] + 1)/2); //stands for real not angle
+
+        if (
         
-        //this.xv -= (cos((i) * TWO_PI) * 0.2); //sets the velocity
-        //this.yv -= (sin((i) * TWO_PI) * 0.2);
-        
-        this.x -= (cos((i) * TWO_PI) * (difficulty/4 + 8)); //"slaps" the base
-        this.y -= (sin((i) * TWO_PI) * (difficulty/4 + 8));
-        
-        this.health -= 1; //takes damage
+        //print((noteangle[dir] + 1)/2 + " " + this.player1.direction);
+        /*
+        if ((this.player1.id == id && this.player1.direction < (noteangle[dir] + 1)/2 + 0.2 && this.player1.direction > (noteangle[dir] + 1)/2 - 0.2) || 
+            (this.player2.id == id && this.player2.direction < (noteangle[dir] + 1)/2 + 0.2 && this.player2.direction > (noteangle[dir] + 1)/2 - 0.2)) {
+            print(id + " got hit!");
+            
+        } else*/// {
+            //this.xv -= (cos((i) * TWO_PI) * 0.2); //sets the velocity
+            //this.yv -= (sin((i) * TWO_PI) * 0.2);
+
+            this.x -= (cos((i) * TWO_PI) * (difficulty/4 + 8)); //"slaps" the base
+            this.y -= (sin((i) * TWO_PI) * (difficulty/4 + 8));
+
+            this.health -= 1; //takes damage
+        //}
     }
 }
 
@@ -199,7 +210,7 @@ class lazer {
         } 
         if (this.start < 50 && this.end > 50) {
             this.playing = true;
-            base.hit(this.direction);
+            base.hit(this.direction,this.id);
         }
         
         if (!this.growing && this.end > 0) this.end -= difficulty;

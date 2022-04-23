@@ -16,7 +16,7 @@ function preload() {
 
 function setup() {
     colors = [color(128,128,255,180),color(255,200,100,180),color(255,255,255,180)];
-    load("testtwo");
+    load("testthree");
     playField = new PlayField();
     base = new Base();
     amplitude = new p5.Amplitude();
