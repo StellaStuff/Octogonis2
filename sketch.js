@@ -21,7 +21,7 @@ function setup() {
     base = new Base();
     amplitude = new p5.Amplitude();
     
-    createCanvas(1280,820);
+    createCanvas(1280,820,SVG);
     size = sqrt((width * width) + (height * height)) / 2; //sets the size variable that dictates the size of objects that have to go off screen, it is the distance from one corner of the screen to the other in pixels
     setInterval(tick, 1000/speed); //sets up the tick function where all of the game logic resides, it is seperate from the draw loop so that the framerate doesnt effect game speed or audio sync
     frameRate(60); //sets the max framerate
@@ -49,12 +49,14 @@ function loading() { //checks if stuff is loaded in before finishing the loading
         midiPlayer.loadArrayBuffer(midiFile.bytes);
         
         gameState = "titleScreen";
+
         //print(keyboardHandler);
     }
 }
 
 
 function draw() { ///main p5js draw loop. ONLY use for graphics related functions, all game functions reside in tick()
+    clear();
     translate(width/2,height/2);
     switch (gameState) {
         case "titleScreen":

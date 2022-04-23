@@ -37,12 +37,13 @@ class Base {
         this.spring = 1;
         this.deadzone = 2;
         this.distance;
-        this.health = 25;
+        this.health = 2500;
         this.player1 = new Player(0);
         this.player2 = new Player(1);
+        this.size = 0;
     }
     show () {
-        nGon(this.x,this.y,100,100,8,TWO_PI/16);
+        nGon(this.x,this.y,100 + this.size,100 + this.size,8,TWO_PI/16);
         this.player1.show();
         this.player2.show();
     }
@@ -79,25 +80,34 @@ class Base {
     } 
     hit (dir,id) {
         var i = (noteangle[dir] + 5)/16; // gets a ratio from the given note angle and the max number of angles using the "noteangle" lookup table
-        var rna = (noteangle[dir] + 1)/2); //stands for real not angle
+        var rna = ((noteangle[dir] + 1)/2); //stands for real not angle
+        var hit = true //flag that gets set to false if the hit is deflected
 
-        if (
-        
-        //print((noteangle[dir] + 1)/2 + " " + this.player1.direction);
-        /*
-        if ((this.player1.id == id && this.player1.direction < (noteangle[dir] + 1)/2 + 0.2 && this.player1.direction > (noteangle[dir] + 1)/2 - 0.2) || 
-            (this.player2.id == id && this.player2.direction < (noteangle[dir] + 1)/2 + 0.2 && this.player2.direction > (noteangle[dir] + 1)/2 - 0.2)) {
-            print(id + " got hit!");
+        switch (id) {
+            case this.player1.id:
+                if (this.player1.direction < (noteangle[dir] + 1)/2 + 0.6 && this.player1.direction > (noteangle[dir] + 1)/2 - 0.6) { //checks if the angle of the note is within 0.5 of 1/8 of a circle of the player its looking for
+                    hit = false;
+                }
+            break;
+            case this.player2.id:
+                if (this.player2.direction < (noteangle[dir] + 1)/2 + 0.6 && this.player2.direction > (noteangle[dir] + 1)/2 - 0.6) {
+                    hit = false;
+                }
+            break
+            default:
             
-        } else*/// {
-            //this.xv -= (cos((i) * TWO_PI) * 0.2); //sets the velocity
-            //this.yv -= (sin((i) * TWO_PI) * 0.2);
-
+        }
+        
+        if (hit) {
+            print("hit!");
             this.x -= (cos((i) * TWO_PI) * (difficulty/4 + 8)); //"slaps" the base
             this.y -= (sin((i) * TWO_PI) * (difficulty/4 + 8));
 
-            this.health -= 1; //takes damage
-        //}
+            this.health -= 1; //takes damage 
+            this.size = random(10);
+        } else {
+            this.size = 0;   
+        }
     }
 }
 

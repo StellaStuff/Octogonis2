@@ -48,5 +48,10 @@
         "key": "escape",
         "code": 27,
         "active": 0
+    },
+    "PLAY": {
+        "key": "p",
+        "code": 80,
+        "active": 0
     }
 }
