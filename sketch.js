@@ -7,7 +7,9 @@ var keyangles = [[0,1,0,0],[0,1,1,0],[0,0,1,0],[1,0,1,0],[1,0,0,0],[1,0,0,1],[0,
 var speed = 30; //ticks per second
 var difficulty = 0 //how hard the game is, higher number harder the game, the ammount of pixels the lazers move per tick (gets set on song load)
 
-let midiPlayer, audio, playField, amplitude, midiFile, songs, inputs;
+
+
+let midiPlayer, audio, playField, amplitude, midiFile, songs, inputs, svg ,htmlcanvas;
 
 function preload() {
     songs = loadJSON("music.json");
@@ -16,15 +18,18 @@ function preload() {
 
 function setup() {
     colors = [color(128,128,255,180),color(255,200,100,180),color(255,255,255,180)];
+
     load("testthree");
     playField = new PlayField();
     base = new Base();
     amplitude = new p5.Amplitude();
     
     createCanvas(1280,820,SVG);
+
     size = sqrt((width * width) + (height * height)) / 2; //sets the size variable that dictates the size of objects that have to go off screen, it is the distance from one corner of the screen to the other in pixels
     setInterval(tick, 1000/speed); //sets up the tick function where all of the game logic resides, it is seperate from the draw loop so that the framerate doesnt effect game speed or audio sync
     frameRate(60); //sets the max framerate
+    htmlcanvas = document.querySelector(".p5Canvas");
 }
 
 function load(songName) { //loads the files into memory
@@ -115,7 +120,8 @@ function drawLoading() {
 }
     
 function drawTitleScreen() {
-    strokeWeight(amplitude.getLevel()*50 + 0.5);
+    htmlcanvas.style.strokeWidth = 10;//amplitude.getLevel()*50 + 0.5;
+    //strokeWeight(amplitude.getLevel()*50 + 0.5);
     drawBackGround();
     playField.show();
     fill(0);

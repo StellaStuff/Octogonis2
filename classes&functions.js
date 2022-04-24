@@ -43,7 +43,8 @@ class Base {
         this.size = 0;
     }
     show () {
-        nGon(this.x,this.y,100 + this.size,100 + this.size,8,TWO_PI/16);
+        //nGon(this.x,this.y,100 + this.size,100 + this.size,8,TWO_PI/16);
+        image(svg, this.x + width/2 - 50, this.y + height/2 - 50, 100, 100);
         this.player1.show();
         this.player2.show();
     }
