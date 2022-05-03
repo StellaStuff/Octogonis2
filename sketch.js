@@ -1,3 +1,19 @@
+/*let svg;
+
+function setup() {
+    createCanvas(100,100,SVG);
+    svg = loadSVG("graphics/base.svg");
+}
+
+function draw() {
+    background(0);
+    image(svg,0,0,100,100);
+}
+
+function test() {
+
+} */
+
 var gameState = "loading";
 var size;
 var halfnotes = [0,1,1,0,1,1,1,0];
@@ -9,11 +25,12 @@ var difficulty = 0 //how hard the game is, higher number harder the game, the am
 
 
 
-let midiPlayer, audio, playField, amplitude, midiFile, songs, inputs, svg ,htmlcanvas;
+let midiPlayer, audio, playField, amplitude, midiFile, songs, inputs, graphics ,htmlcanvas;
 
 function preload() {
     songs = loadJSON("music.json");
     inputs = loadJSON("inputs.json");
+    graphics = loadJSON("graphics.json");
 }
 
 function setup() {
@@ -30,6 +47,21 @@ function setup() {
     setInterval(tick, 1000/speed); //sets up the tick function where all of the game logic resides, it is seperate from the draw loop so that the framerate doesnt effect game speed or audio sync
     frameRate(60); //sets the max framerate
     htmlcanvas = document.querySelector(".p5Canvas");
+    print(graphics);
+    loadGraphics();
+    print(graphics);
+}
+
+function loadGraphics() {
+    
+    let temp = Object.keys(graphics); //creates a temporary array of strings based on the names of the inputs
+    graphics.isLoaded = [];
+    for (let i = 0; i < temp.length; i++) {
+        for (let j = 0; j < graphics[temp[i]].length; j++) {  
+            graphics.isLoaded[i*j] = false;
+            graphics[temp[i]][graphics[temp[i]][j]] = loadSVG("graphics/" + graphics[temp[i]][j] + ".svg",function() {graphics.isLoaded[i*j] = true;});
+        }
+    }
 }
 
 function load(songName) { //loads the files into memory
@@ -41,7 +73,7 @@ function load(songName) { //loads the files into memory
 }
 
 function loading() { //checks if stuff is loaded in before finishing the loading process and moving on
-    if(audio.isLoaded && midiFile.isLoaded) {
+    if(audio.isLoaded && midiFile.isLoaded && graphics.isLoaded.reduce(function(acc, val) { return acc + val; }, 0) == graphics.isLoaded.length) {
         console.log("done loading!");
         midiPlayer = new MidiPlayer.Player(function(event) {
             playField.add(event);
