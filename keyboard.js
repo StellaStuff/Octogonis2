@@ -13,7 +13,8 @@ function check(pr) { //pr stands for pressed/released
 function keyPressed() {
     check(true);
     if (inputs.PLAY.active) {
-        startNewGame();   
+        save();
+        //startNewGame();   
     }
 }
     

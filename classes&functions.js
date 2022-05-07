@@ -44,7 +44,8 @@ class Base {
     }
     show () {
         //nGon(this.x,this.y,100 + this.size,100 + this.size,8,TWO_PI/16);
-        //image(svg, this.x + width/2 - 50, this.y + height/2 - 50, 100, 100);
+        imageMode(CENTER);
+        image(this.g, this.x + width/2, this.y + height/2, (100 + this.size)*2, (100 + this.size)*2);
         this.player1.show();
         this.player2.show();
     }
@@ -105,7 +106,7 @@ class Base {
             this.y -= (sin((i) * TWO_PI) * (difficulty/4 + 8));
 
             this.health -= 1; //takes damage 
-            this.size = random(10);
+            this.size = random(3);
         } else {
             this.size = 0;   
         }

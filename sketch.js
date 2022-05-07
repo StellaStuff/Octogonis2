@@ -25,43 +25,23 @@ var difficulty = 0 //how hard the game is, higher number harder the game, the am
 
 
 
-let midiPlayer, audio, playField, amplitude, midiFile, songs, inputs, graphics ,htmlcanvas;
+let midiPlayer, audio, playField = new PlayField(), amplitude = new p5.Amplitude(), midiFile, songs, inputs, htmlcanvas, base = new Base();
 
 function preload() {
     songs = loadJSON("music.json");
     inputs = loadJSON("inputs.json");
-    graphics = loadJSON("graphics.json");
+    base.g = loadSVG("graphics/base.svg");
 }
 
 function setup() {
     colors = [color(128,128,255,180),color(255,200,100,180),color(255,255,255,180)];
 
     load("testthree");
-    playField = new PlayField();
-    base = new Base();
-    amplitude = new p5.Amplitude();
-    
     createCanvas(1280,820,SVG);
-
     size = sqrt((width * width) + (height * height)) / 2; //sets the size variable that dictates the size of objects that have to go off screen, it is the distance from one corner of the screen to the other in pixels
     setInterval(tick, 1000/speed); //sets up the tick function where all of the game logic resides, it is seperate from the draw loop so that the framerate doesnt effect game speed or audio sync
     frameRate(60); //sets the max framerate
     htmlcanvas = document.querySelector(".p5Canvas");
-    print(graphics);
-    loadGraphics();
-    print(graphics);
-}
-
-function loadGraphics() {
-    
-    let temp = Object.keys(graphics); //creates a temporary array of strings based on the names of the inputs
-    graphics.isLoaded = [];
-    for (let i = 0; i < temp.length; i++) {
-        for (let j = 0; j < graphics[temp[i]].length; j++) {  
-            graphics.isLoaded[i*j] = false;
-            graphics[temp[i]][graphics[temp[i]][j]] = loadSVG("graphics/" + graphics[temp[i]][j] + ".svg",function() {graphics.isLoaded[i*j] = true;});
-        }
-    }
 }
 
 function load(songName) { //loads the files into memory
@@ -73,7 +53,7 @@ function load(songName) { //loads the files into memory
 }
 
 function loading() { //checks if stuff is loaded in before finishing the loading process and moving on
-    if(audio.isLoaded && midiFile.isLoaded && graphics.isLoaded.reduce(function(acc, val) { return acc + val; }, 0) == graphics.isLoaded.length) {
+    if(audio.isLoaded && midiFile.isLoaded) {
         console.log("done loading!");
         midiPlayer = new MidiPlayer.Player(function(event) {
             playField.add(event);
@@ -152,13 +132,13 @@ function drawLoading() {
 }
     
 function drawTitleScreen() {
-    htmlcanvas.style.strokeWidth = 10;//amplitude.getLevel()*50 + 0.5;
+    htmlcanvas.style.strokeWidth = amplitude.getLevel()*50 + 0.5;
     //strokeWeight(amplitude.getLevel()*50 + 0.5);
     drawBackGround();
     playField.show();
     fill(0);
     stroke(255);
-    base.show();
+    //base.show();
     //player.show();
 }
 
