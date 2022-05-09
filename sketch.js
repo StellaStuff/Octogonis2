@@ -19,7 +19,7 @@ var size;
 var halfnotes = [0,1,1,0,1,1,1,0];
 var fullnotes = [1,0,1,0,1,1,0,1,0,1,0,1];
 var noteangle = [1,2,3,4,5,7,8,9,10,11,12,13,15];
-var keyangles = [[0,1,0,0],[0,1,1,0],[0,0,1,0],[1,0,1,0],[1,0,0,0],[1,0,0,1],[0,0,0,1],[0,1,0,1]];
+var keyangles = [[0,2,0,0],[0,1,1,0],[0,0,1,0],[1,0,1,0],[1,0,0,0],[1,0,0,1],[0,0,0,1],[0,1,0,1]];
 var speed = 30; //ticks per second
 var difficulty = 0 //how hard the game is, higher number harder the game, the ammount of pixels the lazers move per tick (gets set on song load)
 
