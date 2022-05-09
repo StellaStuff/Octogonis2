@@ -36,7 +36,7 @@ function preload() {
 function setup() {
     colors = [color(128,128,255,180),color(255,200,100,180),color(255,255,255,180)];
 
-    load("testthree");
+    load("testfour");
     createCanvas(1280,820,SVG);
     size = sqrt((width * width) + (height * height)) / 2; //sets the size variable that dictates the size of objects that have to go off screen, it is the distance from one corner of the screen to the other in pixels
     setInterval(tick, 1000/speed); //sets up the tick function where all of the game logic resides, it is seperate from the draw loop so that the framerate doesnt effect game speed or audio sync
@@ -138,7 +138,7 @@ function drawTitleScreen() {
     playField.show();
     fill(0);
     stroke(255);
-    //base.show();
+    base.show();
     //player.show();
 }
 

@@ -11,6 +11,10 @@
         "testthree": {
             "difficulty": 4,
             "skill level": "debug"
+        },
+        "testfour": {
+            "difficulty": 15,
+            "skill level": "debug"
         }
     }
 }

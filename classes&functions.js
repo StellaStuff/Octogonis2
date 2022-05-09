@@ -54,8 +54,8 @@ class Base {
         this.player1.move();
         this.player2.move();
         
-        this.x += this.xv;
-        this.y += this.yv;
+        //this.x += this.xv;
+        //this.y += this.yv;
         
         this.distance = (abs(this.x) + abs(this.y)) / 5;
         
@@ -102,8 +102,8 @@ class Base {
         
         if (hit) {
             print("hit!");
-            this.x -= (cos((i) * TWO_PI) * (difficulty/4 + 8)); //"slaps" the base
-            this.y -= (sin((i) * TWO_PI) * (difficulty/4 + 8));
+            //this.x -= (cos((i) * TWO_PI) * (difficulty/4 + 8)); //"slaps" the base
+            //this.y -= (sin((i) * TWO_PI) * (difficulty/4 + 8));
 
             this.health -= 1; //takes damage 
             this.size = random(3);
