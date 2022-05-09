@@ -38,6 +38,7 @@ class Base {
         this.deadzone = 2;
         this.distance;
         this.health = 2500;
+        this.kickshield = 100;
         this.player1 = new Player(0);
         this.player2 = new Player(1);
         this.size = 0;
@@ -48,11 +49,23 @@ class Base {
         image(this.g, this.x + width/2, this.y + height/2, (100 + this.size)*2, (100 + this.size)*2);
         this.player1.show();
         this.player2.show();
+        
+        colorMode(RGB);
+        stroke(255,this.kickshield*5 - 150);
+        fill(0,0,0,0);
+        raycle(20,60,(0 * 2) + 4,1/10,16);
     }
     move () {
         
         this.player1.move();
         this.player2.move();
+
+        this.kickshield -= 3;
+        
+        if (inputs.DRUM.active && this.kickshield < 70) {
+            this.kickshield = 100;
+            inputs.DRUM.active = false;
+        }
         
         //this.x += this.xv;
         //this.y += this.yv;
@@ -96,17 +109,22 @@ class Base {
                     hit = false;
                 }
             break
+            case -1:
+                if (this.kickshield > 80) { //checks if the kickshield is active
+                    hit = false;
+                }
+            break
             default:
             
         }
         
         if (hit) {
-            print("hit!");
+            //print("hit!");
             //this.x -= (cos((i) * TWO_PI) * (difficulty/4 + 8)); //"slaps" the base
             //this.y -= (sin((i) * TWO_PI) * (difficulty/4 + 8));
 
             this.health -= 1; //takes damage 
-            this.size = random(3);
+            this.size = random(100);
         } else {
             this.size = 0;   
         }
